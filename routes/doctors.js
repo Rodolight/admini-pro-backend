@@ -21,11 +21,13 @@ router.post('/', [
 
 // Ruta para Actualizar doctores
 router.put('/:id', [
-
+        validateJWT,
+        check('name', 'El nombre del doctor es requerido.').notEmpty(),
+        check('hospital', 'El hospital id no es válido.').isMongoId(),
     ],
     updateDoctors);
 
-router.delete('/:id', deleteDoctor);
+router.delete('/:id', validateJWT, deleteDoctor);
 
 // Exportar las rutas para que se puedan utilizar fuera de este controlador
 module.exports = router;

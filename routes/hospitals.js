@@ -19,7 +19,8 @@ router.post('/', [
 
 // Ruta para Actualizar hospitales
 router.put('/:id', [
-
+        validateJWT,
+        check('name', 'El nombre del hospital es requerido.').notEmpty(),
     ],
     updateHospitals);
 
