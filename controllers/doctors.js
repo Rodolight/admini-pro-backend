@@ -11,6 +11,28 @@ const getDoctors = async(req, res = response) => {
     });
 };
 
+const getDoctorById = async(req, res = response) => {
+    const id = req.params.id;
+    try {
+        const doctor = await Doctor.findById(id)
+            .populate('user', 'name img')
+            .populate('hospital', 'name img');
+
+        res.json({
+            ok: true,
+            doctor
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: false,
+            msg: `No existe ningún médico con ese id: ${id}`
+        });
+    }
+
+};
+
+
 const createDoctors = async(req, res = response) => {
 
     const uid = req.uid;
@@ -77,6 +99,7 @@ const deleteDoctor = async(req, res = response) => {
 
 module.exports = {
     getDoctors,
+    getDoctorById,
     createDoctors,
     updateDoctors,
     deleteDoctor

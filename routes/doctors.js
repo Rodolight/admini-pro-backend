@@ -4,12 +4,13 @@ const { check } = require('express-validator');
 
 const { validateFields } = require('../middlewares/validate-fields');
 const { validateJWT } = require('../middlewares/validate-jwt');
-const { getDoctors, createDoctors, updateDoctors, deleteDoctor } = require('../controllers/doctors');
+const { getDoctors, createDoctors, updateDoctors, deleteDoctor, getDoctorById } = require('../controllers/doctors');
 
 const router = Router();
 
 // Ruta para Obtener doctores
-router.get('/', getDoctors);
+router.get('/', validateJWT, getDoctors);
+
 // Ruta para Guardar un hospital
 router.post('/', [
         validateJWT,
@@ -27,7 +28,12 @@ router.put('/:id', [
     ],
     updateDoctors);
 
+
+// Ruta para eliminar doctor
 router.delete('/:id', validateJWT, deleteDoctor);
+
+// Ruta para buscar un medico
+router.get('/:id', validateJWT, getDoctorById);
 
 // Exportar las rutas para que se puedan utilizar fuera de este controlador
 module.exports = router;
