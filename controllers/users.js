@@ -5,10 +5,10 @@ const { generateJWT } = require('../helpers/jwt');
 
 const getUsers = async(req, res) => {
     const from = Number(req.query.from) || 0;
-    const top = Number(req.query.top) || 5;
+    const top = Number(req.query.top) || 0;
 
     const [users, total] = await Promise.all([
-        User.find({}, 'name email role google img').skip(from).limit(top),
+        filterUser(from,top),
         User.countDocuments()
     ]);
 
@@ -18,6 +18,14 @@ const getUsers = async(req, res) => {
         total
     });
 };
+
+filterUser = async (from, top) => {
+    if (top == 0){
+      return await  User.find({}, 'name email role google img').skip(from)
+      }else {
+       return await  User.find({}, 'name email role google img').skip(from).limit(top)
+      }
+}
 
 const createUser = async(req, res = response) => {
 

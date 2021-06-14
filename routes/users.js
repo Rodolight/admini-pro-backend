@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { getUsers, createUser, updateUsers, deleteUser } = require('../controllers/users');
 const { validateFields } = require('../middlewares/validate-fields');
-const { validateJWT } = require('../middlewares/validate-jwt');
+const { validateJWT, validateAdminRole, validateAdminRoleOrSelfUser } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
@@ -21,6 +21,7 @@ router.post('/', [
 // Ruta para Actualizar usuarios
 router.put('/:id', [
         validateJWT,
+        validateAdminRoleOrSelfUser,
         check('name', 'El nombre es requerido.').not().isEmpty(),
         check('role', 'El rol es requerido.').not().isEmpty(),
         check('email', 'El email es requerido.').isEmail(),
@@ -28,7 +29,7 @@ router.put('/:id', [
     ],
     updateUsers);
 
-router.delete('/:id', validateJWT, deleteUser);
+router.delete('/:id', [validateJWT, validateAdminRole], deleteUser);
 
 // Exportar las rutas para que se puedan utilizar fuera de este controlador
 module.exports = router;

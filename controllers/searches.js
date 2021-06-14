@@ -70,6 +70,7 @@ const getCollection = async(req, res = response) => {
 };
 
 
+
 module.exports = {
     getAll,
     getCollection
