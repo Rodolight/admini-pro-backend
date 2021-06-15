@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 
 const { dbConnection } = require('./database/config');
+const  path  = require('path');
 
 // crear el servidor express
 const app = express();
@@ -30,7 +31,9 @@ app.use('/api/searches', require('./routes/searches'));
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/upload', require('./routes/uploads'));
 
-
+app.use('*', (req, res)=>{
+    res.sendFile(path.resolve(__dirname, 'public/index.html'));
+})
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en puerto ', process.env.PORT);
