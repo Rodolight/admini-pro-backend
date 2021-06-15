@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+
+.fast {
+    animation-duration: 0.3s;
+    animation-fill-mode: both
+}
+
+#themecolors .selector,
+.cursor {
+    cursor: pointer;
+}
+
+#google-btn {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.img-avatar {
+    width: 160px;
+    height: 160px;
+}
+
+.image-upload {
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+}
+
+.w75{
+    width: 75px;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w140 {
+    width: 140px;
+}
+
+.w300 {
+    width: 300px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.modal-image {
+    background-color: rgba(0, 0, 0, 0.4);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 9999;
+}
+
+.hide {
+    display: none;
+}
+
+/*# sourceMappingURL=styles.325b518d81db5e81a764.css.map*/
